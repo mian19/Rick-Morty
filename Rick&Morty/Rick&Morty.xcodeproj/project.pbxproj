@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6719CF07280A085400EA7C87 /* UIImageView+load.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6719CF06280A085400EA7C87 /* UIImageView+load.swift */; };
 		67A1783928084AA800D5147A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A1783828084AA800D5147A /* AppDelegate.swift */; };
 		67A1783B28084AA800D5147A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A1783A28084AA800D5147A /* SceneDelegate.swift */; };
 		67A1783D28084AA800D5147A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A1783C28084AA800D5147A /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6719CF06280A085400EA7C87 /* UIImageView+load.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+load.swift"; sourceTree = "<group>"; };
 		67A1783528084AA800D5147A /* Rick&Morty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rick&Morty.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A1783828084AA800D5147A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67A1783A28084AA800D5147A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				67A1784C2808524800D5147A /* CustomTableViewCell.swift */,
 				67A178502808575500D5147A /* Networking.swift */,
 				67A1783C28084AA800D5147A /* ViewController.swift */,
+				6719CF06280A085400EA7C87 /* UIImageView+load.swift */,
 				67A1783E28084AA800D5147A /* Main.storyboard */,
 				67A1784128084AAB00D5147A /* Assets.xcassets */,
 				67A1784328084AAB00D5147A /* LaunchScreen.storyboard */,
@@ -152,6 +155,7 @@
 				67A1783B28084AA800D5147A /* SceneDelegate.swift in Sources */,
 				67A178512808575500D5147A /* Networking.swift in Sources */,
 				67A1784D2808524800D5147A /* CustomTableViewCell.swift in Sources */,
+				6719CF07280A085400EA7C87 /* UIImageView+load.swift in Sources */,
 				67A1784F2808542600D5147A /* ModelJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

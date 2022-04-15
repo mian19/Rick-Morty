@@ -10,7 +10,7 @@ import UIKit
 
 class Networking {
     
-    func request(urlString: String, completion: @escaping (Swift.Result<RequestResult, Error>) -> Void) {
+    func request(urlString: String, completion: @escaping (Swift.Result<RequestResult, Error>?) -> Void) {
         
         guard let url = URL(string: urlString) else { return }
         
@@ -37,6 +37,31 @@ class Networking {
         
         return
         
+    }
+    
+    func loadImage(urlString: String, completion: @escaping (Swift.Result<UIImage, Error>) -> Void) {
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) {data, _ , error in
+            DispatchQueue.main.async {
+                
+            guard let data = data, error == nil else {
+                return
+            }
+                    if let image = UIImage(data: data) {
+                    completion(.success(image))
+                    }
+          
+                
+                
+            
+            
+               
+            }
+            
+        }.resume()
     }
     
 

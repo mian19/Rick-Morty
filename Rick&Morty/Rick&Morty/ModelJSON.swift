@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct RequestResult: Codable {
     let info: Info

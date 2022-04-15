@@ -12,12 +12,13 @@ class CustomTableViewCell: UITableViewCell {
     var imView: UIImageView!
     var labelName: UILabel!
     var otherLabel: UILabel!
-
+    var imagesForPersons: [UIImage]!
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-     
-         imView = UIImageView()
-         labelName = UILabel()
+        
+        imView = UIImageView()
+        labelName = UILabel()
         otherLabel = UILabel()
         imView.translatesAutoresizingMaskIntoConstraints = false
         labelName.translatesAutoresizingMaskIntoConstraints = false
@@ -30,13 +31,14 @@ class CustomTableViewCell: UITableViewCell {
         imView.clipsToBounds = true
         imView.backgroundColor = .gray
         
-        labelName.backgroundColor = .blue
+        labelName.font = UIFont.boldSystemFont(ofSize: 18)
         
-        otherLabel.backgroundColor = .yellow
         otherLabel.numberOfLines = 2
         otherLabel.text = "Loading..."
         setElements()
     }
+    
+    
     
     private func setElements() {
         NSLayoutConstraint.activate([
@@ -56,7 +58,6 @@ class CustomTableViewCell: UITableViewCell {
             trailingAnchor.constraint(equalTo: otherLabel.trailingAnchor, constant: 5),
             bottomAnchor.constraint(equalTo: otherLabel.bottomAnchor, constant: 10)
         ])
-
     }
     
     required init?(coder: NSCoder) {
