@@ -15,6 +15,7 @@
 		67A1784528084AAB00D5147A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A1784328084AAB00D5147A /* LaunchScreen.storyboard */; };
 		67A1784D2808524800D5147A /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A1784C2808524800D5147A /* CustomTableViewCell.swift */; };
 		67A1784F2808542600D5147A /* ModelJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A1784E2808542600D5147A /* ModelJSON.swift */; };
+		67A178512808575500D5147A /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A178502808575500D5147A /* Networking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		67A1784628084AAB00D5147A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67A1784C2808524800D5147A /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		67A1784E2808542600D5147A /* ModelJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelJSON.swift; sourceTree = "<group>"; };
+		67A178502808575500D5147A /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,9 +64,10 @@
 			children = (
 				67A1783828084AA800D5147A /* AppDelegate.swift */,
 				67A1783A28084AA800D5147A /* SceneDelegate.swift */,
-				67A1783C28084AA800D5147A /* ViewController.swift */,
 				67A1784E2808542600D5147A /* ModelJSON.swift */,
 				67A1784C2808524800D5147A /* CustomTableViewCell.swift */,
+				67A178502808575500D5147A /* Networking.swift */,
+				67A1783C28084AA800D5147A /* ViewController.swift */,
 				67A1783E28084AA800D5147A /* Main.storyboard */,
 				67A1784128084AAB00D5147A /* Assets.xcassets */,
 				67A1784328084AAB00D5147A /* LaunchScreen.storyboard */,
@@ -147,6 +150,7 @@
 				67A1783D28084AA800D5147A /* ViewController.swift in Sources */,
 				67A1783928084AA800D5147A /* AppDelegate.swift in Sources */,
 				67A1783B28084AA800D5147A /* SceneDelegate.swift in Sources */,
+				67A178512808575500D5147A /* Networking.swift in Sources */,
 				67A1784D2808524800D5147A /* CustomTableViewCell.swift in Sources */,
 				67A1784F2808542600D5147A /* ModelJSON.swift in Sources */,
 			);
