@@ -38,8 +38,6 @@ class CustomTableViewCell: UITableViewCell {
         setElements()
     }
     
-    
-    
     private func setElements() {
         NSLayoutConstraint.activate([
             

@@ -9,66 +9,70 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let networking = Networking()
     private var startInfo: Info? = nil
     private var listOfPersons: [Result]? = []
     private var listOfImages: [String] = []
     private var page: Int = 1
-    private var infoURL: String!
+    private var blur: UIVisualEffectView!
+    private let queue = OperationQueue()
     fileprivate var table: UITableView!
     
     override func loadView() {
         let customView = UIView(frame: UIScreen.main.bounds)
         view = customView
-        infoURL = "https://rickandmortyapi.com/api/character/"
-    }
-   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        getPagesNumber()
-        workWithTable()
-   
-        view.addSubview(table)
     }
     
-    private func getPagesNumber() {
-        networking.request(urlString: infoURL) { (result) in
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        queue.maxConcurrentOperationCount = 1
+        getPageNumber()
+        workWithTable()
+        showLoading()
+    }
+    
+    private func getPageNumber() {
+        
+        guard let url = URL(string: "https://rickandmortyapi.com/api/character/?page=\(self.page)") else { return }
+        
+        let operation = LoadOperation(session: URLSession.shared, downloadTaskURL: url, completionHandler: { result in
             switch result {
             case .success(let requestResult):
                 if self.startInfo == nil {
                     self.startInfo = requestResult.info
                 }
-                self.cycleForFillRows()
+                self.newCycleForFillRows()
             case .failure(let error):
                 print(error)
             case .none:
                 break
             }
-        }
+        })
+        
+        queue.addOperation(operation)
     }
     
-    private func cycleForFillRows() {
+    private func newCycleForFillRows() {
         repeat {
             
-            self.infoURL = "https://rickandmortyapi.com/api/character/?page=\(self.page)"
-
-            self.networking.request(urlString: self.infoURL) { (result) in
-            switch result {
-            case .success(let requestResult):
-                requestResult.results.forEach{
-                    self.listOfImages.append($0.image)
+            guard let url = URL(string: "https://rickandmortyapi.com/api/character/?page=\(self.page)") else { return }
+            
+            let operation = LoadOperation(session: URLSession.shared, downloadTaskURL: url, completionHandler: { result in
+                switch result {
+                case .success(let requestResult):
+                    requestResult.results.forEach{
+                        self.listOfPersons?.append($0)
+                        self.listOfImages.append($0.image)
+                    }
+                case .failure(let error):
+                    print(error)
+                case .none:
+                    break
                 }
-  
-                self.listOfPersons! += requestResult.results
-                self.table.reloadData()
-            case .failure(let error):
-                print(error)
-            case .none:
-                break
-            }
-        }
+            })
+            
+            queue.addOperation(operation)
             self.page += 1
-        } while self.page <= self.startInfo!.pages
+        } while self.page <= self.startInfo?.pages ?? 20
     }
     
     private func workWithTable() {
@@ -76,16 +80,33 @@ class ViewController: UIViewController {
         table.dataSource = self
         table.delegate = self
         table.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.reuseID)
+        view.addSubview(table)
     }
     
-  //  private func downloadImages(imagesNames: [String])
+    private func showLoading() {
+        DispatchQueue.main.async {
+            let loadingView = UIView.viewForLoading()
+            
+            let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialLight)
+            self.blur = UIVisualEffectView(effect: blurEffect)
+            self.blur.frame = self.view.bounds
+            self.view.addSubview(self.blur)
+            
+            loadingView.center = self.view.center
+            self.view.insertSubview(loadingView, aboveSubview: self.blur)
+            _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { _ in
+                self.table.reloadData()
+                self.blur.removeFromSuperview()
+                loadingView.removeFromSuperview()
+            }
+        }
+    }
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
-
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listOfPersons?.count ?? 0
+        return startInfo?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -93,18 +114,16 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = table.dequeueReusableCell(withIdentifier: CustomTableViewCell.reuseID) as! CustomTableViewCell
         
         guard let person = listOfPersons?[indexPath.row]  else {
-          return cell
+            return cell
         }
+        
         cell.labelName?.text = person.name
         cell.otherLabel?.text = "species: \(person.species)\ngender: \(person.gender)"
         cell.imView?.load(urlString: person.image)
-       
         cell.layer.borderWidth = 2
-        print(indexPath.row)
-
+        
         return cell
     }
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
