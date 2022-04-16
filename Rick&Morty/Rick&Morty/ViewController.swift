@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     
     override func loadView() {
         let customView = UIView(frame: UIScreen.main.bounds)
+        customView.backgroundColor = .white
         view = customView
     }
     
@@ -40,7 +41,7 @@ class ViewController: UIViewController {
                 if self.startInfo == nil {
                     self.startInfo = requestResult.info
                 }
-                self.newCycleForFillRows()
+                self.cycleForFillRows()
             case .failure(let error):
                 print(error)
             case .none:
@@ -51,7 +52,7 @@ class ViewController: UIViewController {
         queue.addOperation(operation)
     }
     
-    private func newCycleForFillRows() {
+    private func cycleForFillRows() {
         repeat {
             
             guard let url = URL(string: "https://rickandmortyapi.com/api/character/?page=\(self.page)") else { return }
@@ -84,7 +85,7 @@ class ViewController: UIViewController {
     }
     
     private func showLoading() {
-        DispatchQueue.main.async {
+       
             let loadingView = UIView.viewForLoading()
             
             let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialLight)
@@ -94,6 +95,7 @@ class ViewController: UIViewController {
             
             loadingView.center = self.view.center
             self.view.insertSubview(loadingView, aboveSubview: self.blur)
+        DispatchQueue.main.async {
             _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { _ in
                 self.table.reloadData()
                 self.blur.removeFromSuperview()
@@ -127,6 +129,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "PersonViewController", bundle: Bundle.main)
+        let viewController = storyboard.instantiateInitialViewController() as! PersonViewController
+        viewController.person = listOfPersons?[indexPath.row]
+        self.present(viewController, animated: true, completion: nil)
     }
     
 }

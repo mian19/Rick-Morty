@@ -56,9 +56,6 @@ class LoadOperation : Operation {
         })
     }
 
-    
-   
-
     override func start() {
       /*
       if the operation or queue got cancelled even

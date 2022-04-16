@@ -23,6 +23,9 @@ class CustomTableViewCell: UITableViewCell {
         imView.translatesAutoresizingMaskIntoConstraints = false
         labelName.translatesAutoresizingMaskIntoConstraints = false
         otherLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        labelName.adjustsFontSizeToFitWidth = true
+        
         self.addSubview(imView)
         self.addSubview(labelName)
         self.addSubview(otherLabel)
